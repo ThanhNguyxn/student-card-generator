@@ -8,11 +8,11 @@
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![GitHub Pages](https://img.shields.io/badge/Deployed-GitHub_Pages-222222?logo=github)](https://thanhnguyx n.github.io/student-card-generator/)
+[![GitHub Pages](https://img.shields.io/badge/Deployed-GitHub_Pages-222222?logo=github)](https://thanhnguyxn.github.io/student-card-generator/)
 
 ![App Screenshot](https://via.placeholder.com/800x400/667eea/ffffff?text=Student+Card+Generator)
 
-[🚀 Live Demo](https://thanhnguyx n.github.io/student-card-generator/) • [📖 Documentation](#features) • [🤝 Contributing](CONTRIBUTING.md) • [☕ Support](https://buymeacoffee.com/thanhnguyxn)
+[🚀 Live Demo](https://thanhnguyxn.github.io/student-card-generator/) • [📖 Documentation](#features) • [🤝 Contributing](CONTRIBUTING.md) • [☕ Support](https://buymeacoffee.com/thanhnguyxn)
 
 </div>
 
@@ -35,7 +35,7 @@
 
 ### Online (Recommended)
 
-Just visit: **[https://thanhnguyx n.github.io/student-card-generator/](https://thanhnguyx n.github.io/student-card-generator/)**
+Just visit: **[https://thanhnguyxn.github.io/student-card-generator/](https://thanhnguyxn.github.io/student-card-generator/)**
 
 ### Local Development
 
