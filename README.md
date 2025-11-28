@@ -1,18 +1,4 @@
 # 🎓 Global Student ID Generator
-
-A production-ready web application that generates professional student ID cards from universities worldwide using AI-powered data generation.
-
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![HTML](https://img.shields.io/badge/HTML-5-orange)
-![CSS](https://img.shields.io/badge/CSS-3-blue)
-![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow)
-
-## ✨ Features
-
-- 🌍 **50+ Universities** from 13 countries (Vietnam, USA, UK, Japan, Germany, Canada, Australia, France, Singapore, China, Brazil, India, South Korea)
-- 🎨 **Premium UI/UX** with glassmorphism effects and smooth animations
-- 🤖 **AI-Powered Data** using Faker.js with automatic localization
-- 📸 **Custom Photo Upload** with Base64 conversion (CORS-safe)
 - 🎴 **Dual Layout Support** - Vertical and Horizontal ID card formats
 - 📥 **Multiple Export Options** - Download as PNG or PDF
 - 📱 **Fully Responsive** - Works on desktop, tablet, and mobile
