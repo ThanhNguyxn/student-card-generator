@@ -1,4 +1,14 @@
 # 🎓 Global Student ID Generator
+A production-ready web application that generates professional student ID cards from universities worldwide using AI-powered data generation.
+
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![HTML](https://img.shields.io/badge/HTML-5-orange)
+![CSS](https://img.shields.io/badge/CSS-3-blue)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow)
+
+## ✨ Features
+
+- 📸 **Custom Photo Upload** with Base64 conversion (CORS-safe)
 - 🎴 **Dual Layout Support** - Vertical and Horizontal ID card formats
 - 📥 **Multiple Export Options** - Download as PNG or PDF
 - 📱 **Fully Responsive** - Works on desktop, tablet, and mobile
@@ -242,9 +252,9 @@ MIT License - feel free to use this project for personal or commercial purposes.
 - html2canvas for DOM rendering
 - jsPDF for PDF export
 
-## 📸 Screenshots
 
-*Add screenshots of your generated student IDs here after deployment*
+### Web Application Preview
+![Student ID Generator Web Interface](image.png)
 
 ## 🚀 Future Enhancements
 
