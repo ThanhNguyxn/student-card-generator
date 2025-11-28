@@ -1,8 +1,7 @@
-// Main Application Logic - Final Clean Version
+// Student ID Generator - Final Clean Version with Working Photos
 document.addEventListener('DOMContentLoaded', function () {
     console.log('[START] Application initialized');
 
-    // DOM Elements
     const countrySelect = document.getElementById('countrySelect');
     const universitySelect = document.getElementById('universitySelect');
     const studentNameInput = document.getElementById('studentName');
@@ -27,7 +26,6 @@ document.addEventListener('DOMContentLoaded', function () {
     attachInputListeners();
 
     function loadCountries() {
-        console.log('[LOAD] Loading countries...');
         countrySelect.innerHTML = '<option value="">-- Select Country --</option>';
         Object.keys(UNIVERSITY_DATA).forEach(country => {
             const option = document.createElement('option');
@@ -35,23 +33,18 @@ document.addEventListener('DOMContentLoaded', function () {
             option.textContent = country;
             countrySelect.appendChild(option);
         });
-        console.log('[SUCCESS] Countries loaded');
     }
 
     function loadUniversities(country) {
-        console.log('[LOAD] Loading universities for:', country);
         universitySelect.innerHTML = '<option value="">-- Select University --</option>';
         universitySelect.disabled = false;
-
         if (!country || !UNIVERSITY_DATA[country]) return;
-
         UNIVERSITY_DATA[country].forEach((uni, index) => {
             const option = document.createElement('option');
             option.value = index;
             option.textContent = uni.name;
             universitySelect.appendChild(option);
         });
-        console.log('[SUCCESS] Universities loaded');
     }
 
     function setFakerLocale(country) {
@@ -63,7 +56,6 @@ document.addEventListener('DOMContentLoaded', function () {
             case 'China': faker.locale = 'zh_CN'; break;
             default: faker.locale = 'en';
         }
-        console.log('[LOCALE] Set to:', faker.locale);
     }
 
     function generateSmartDates() {
@@ -72,36 +64,26 @@ document.addEventListener('DOMContentLoaded', function () {
         const dobYear = now.getFullYear() - age;
         const dob = new Date(dobYear, Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1);
         const enrollmentYear = dobYear + 18;
-        const issueMonth = Math.floor(Math.random() * 12);
-        const issued = new Date(enrollmentYear, issueMonth, Math.floor(Math.random() * 28) + 1);
+        const issued = new Date(enrollmentYear, Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1);
         const validThru = new Date(issued.getFullYear() + 4, issued.getMonth(), issued.getDate());
         return { issued, validThru, dob };
     }
 
     function formatDateForInput(date) {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        return `${year}-${month}-${day}`;
+        return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
     }
 
     function formatDateForDisplay(dateString) {
         if (!dateString) return '';
         const date = new Date(dateString);
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const year = date.getFullYear();
-        return `${day}/${month}/${year}`;
+        return `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`;
     }
 
     function generateStudentId() {
-        const year = new Date().getFullYear();
-        const randomNum = Math.floor(Math.random() * 90000) + 10000;
-        return `${year}${randomNum}`;
+        return `${new Date().getFullYear()}${Math.floor(Math.random() * 90000) + 10000}`;
     }
 
     function generateAllData() {
-        console.log('[GENERATE] Generating all student data...');
         if (!currentUniversity) {
             alert('Please select a university first');
             return;
@@ -115,19 +97,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
         let major = "Information Technology";
         if (currentUniversity.majors && currentUniversity.majors.length > 0) {
-            const randomIndex = Math.floor(Math.random() * currentUniversity.majors.length);
-            major = currentUniversity.majors[randomIndex];
-            console.log('[MAJOR] Selected:', major);
+            major = currentUniversity.majors[Math.floor(Math.random() * currentUniversity.majors.length)];
         }
 
         const fullName = faker.name.findName();
         const emailUsername = fullName.toLowerCase().replace(/\s+/g, '.').replace(/[^a-z.]/g, '');
         const email = `${emailUsername}@${currentUniversity.domain}`;
 
-        // Generate REALISTIC human photo (not cartoon)
-        const randomNum = Math.floor(Math.random() * 99);
-        const gender = Math.random() > 0.5 ? 'men' : 'women';
-        const realisticPhotoUrl = `https://randomuser.me/api/portraits/${gender}/${randomNum}.jpg`;
+        // REALISTIC PHOTO - Using pravatar.cc which works without CORS issues
+        const randomId = Math.floor(Math.random() * 70);
+        const realisticPhotoUrl = `https://i.pravatar.cc/300?img=${randomId}`;
 
         studentNameInput.value = fullName;
         studentIdInput.value = studentId;
@@ -139,9 +118,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const photoUrl = uploadedPhotoBase64 || realisticPhotoUrl;
 
-        console.log('[DATA] Name:', fullName, '| Major:', major);
-        console.log('[DATA] DOB:', formatDateForInput(dates.dob), '→ Enrolled:', dates.issued.getFullYear(), '→ Expires:', dates.validThru.getFullYear());
-        console.log('[PHOTO] Using:', uploadedPhotoBase64 ? 'Uploaded' : 'AI Generated (Realistic)');
+        console.log('[GENERATED]', fullName, '|', major, '|', email);
+        console.log('[DATES] DOB:', dates.dob.getFullYear(), '→ Enrolled:', dates.issued.getFullYear(), '→ Expires:', dates.validThru.getFullYear());
+        console.log('[PHOTO]', uploadedPhotoBase64 ? 'Uploaded' : 'AI Generated');
 
         updateCardPreview(photoUrl);
     }
@@ -149,9 +128,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateCardPreview(photoOverride = null) {
         if (!currentUniversity) return;
 
-        const randomNum = Math.floor(Math.random() * 99);
-        const gender = Math.random() > 0.5 ? 'men' : 'women';
-        const defaultPhoto = `https://randomuser.me/api/portraits/${gender}/${randomNum}.jpg`;
+        const randomId = Math.floor(Math.random() * 70);
+        const defaultPhoto = `https://i.pravatar.cc/300?img=${randomId}`;
         const photoUrl = photoOverride || uploadedPhotoBase64 || defaultPhoto;
 
         renderCard({
@@ -168,16 +146,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function renderCard(data) {
-        console.log('[RENDER] Rendering ID card...');
         cardPreview.innerHTML = '';
-
         const layout = data.university.layout;
         const cardClass = layout === 'vertical' ? 'vertical-card' : 'horizontal-card';
 
         cardPreview.innerHTML = `
       <div class="id-card ${cardClass}" style="border-top: 4px solid ${data.university.color}">
         <div class="glass-overlay"></div>
-        
         <div class="card-header" style="background: linear-gradient(135deg, ${data.university.color}, ${data.university.color}dd)">
           <img src="${data.university.logo}" alt="${data.university.shortName}" class="university-logo" onerror="this.style.display='none'">
           <div class="university-info">
@@ -185,12 +160,10 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="university-full-name">${data.university.name}</p>
           </div>
         </div>
-        
         <div class="card-content">
           <div class="photo-container">
             <img src="${data.photo}" alt="Student Photo" class="student-photo" crossorigin="anonymous">
           </div>
-          
           <div class="student-info">
             <div class="info-row">
               <span class="label">Full Name:</span>
@@ -222,7 +195,6 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
           </div>
         </div>
-        
         <div class="card-footer">
           <div class="signature">
             <span class="signature-text">${data.name}</span>
@@ -256,67 +228,42 @@ document.addEventListener('DOMContentLoaded', function () {
             <span class="barcode-number">${data.id}</span>
           </div>
         </div>
-      </div>
-    `;
-        console.log('[SUCCESS] Card rendered');
+      </div>`;
     }
 
     function attachInputListeners() {
         [studentNameInput, studentIdInput, studentEmailInput, studentMajorInput, dateOfBirthInput, issueDateInput, expiryDateInput].forEach(input => {
-            if (input) {
-                input.addEventListener('input', () => {
-                    if (currentUniversity) updateCardPreview();
-                });
-            }
+            if (input) input.addEventListener('input', () => { if (currentUniversity) updateCardPreview(); });
         });
     }
 
     function handlePhotoUpload(file) {
-        if (!file.type.startsWith('image/')) {
-            alert('Please upload a valid image file');
-            return;
-        }
-
+        if (!file.type.startsWith('image/')) return alert('Please upload a valid image file');
         const reader = new FileReader();
-        reader.onload = (e) => {
-            uploadedPhotoBase64 = e.target.result;
-            if (currentUniversity) updateCardPreview(uploadedPhotoBase64);
-        };
+        reader.onload = (e) => { uploadedPhotoBase64 = e.target.result; if (currentUniversity) updateCardPreview(uploadedPhotoBase64); };
         reader.readAsDataURL(file);
     }
 
     function copyEmail() {
         const email = studentEmailInput.value;
-        if (email) {
-            navigator.clipboard.writeText(email).then(() => alert('Email copied!')).catch(console.error);
-        }
+        if (email) navigator.clipboard.writeText(email).then(() => alert('Email copied!')).catch(console.error);
     }
 
     async function exportToPng() {
         const card = document.querySelector('.id-card');
-        if (!card) {
-            alert('Please generate a student ID first');
-            return;
-        }
-
+        if (!card) return alert('Please generate a student ID first');
         try {
             const canvas = await html2canvas(card, { useCORS: true, allowTaint: true, backgroundColor: '#ffffff', scale: 2 });
             const link = document.createElement('a');
             link.download = `student-id-${Date.now()}.png`;
             link.href = canvas.toDataURL('image/png');
             link.click();
-        } catch (error) {
-            alert('Failed to export PNG');
-        }
+        } catch (error) { alert('Failed to export PNG'); }
     }
 
     async function exportToPdf() {
         const card = document.querySelector('.id-card');
-        if (!card) {
-            alert('Please generate a student ID first');
-            return;
-        }
-
+        if (!card) return alert('Please generate a student ID first');
         try {
             const canvas = await html2canvas(card, { useCORS: true, allowTaint: true, backgroundColor: '#ffffff', scale: 2 });
             const pdf = new jsPDF('landscape', 'mm', 'a4');
@@ -324,9 +271,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const imgHeight = (canvas.height * imgWidth) / canvas.width;
             pdf.addImage(canvas.toDataURL('image/png'), 'PNG', (297 - imgWidth) / 2, (210 - imgHeight) / 2, imgWidth, imgHeight);
             pdf.save(`student-id-${Date.now()}.pdf`);
-        } catch (error) {
-            alert('Failed to export PDF');
-        }
+        } catch (error) { alert('Failed to export PDF'); }
     }
 
     // Event Listeners
@@ -335,16 +280,10 @@ document.addEventListener('DOMContentLoaded', function () {
         uploadedPhotoBase64 = null;
         currentUniversity = null;
         cardPreview.innerHTML = '<div class="placeholder-text">Select a country and university to generate student ID</div>';
-
         [studentNameInput, studentIdInput, studentEmailInput, dateOfBirthInput, issueDateInput, expiryDateInput].forEach(input => input.value = '');
         studentMajorInput.value = 'Information Technology';
-
-        if (country) {
-            loadUniversities(country);
-        } else {
-            universitySelect.innerHTML = '<option value="">-- Select University --</option>';
-            universitySelect.disabled = true;
-        }
+        if (country) loadUniversities(country);
+        else { universitySelect.innerHTML = '<option value="">-- Select University --</option>'; universitySelect.disabled = true; }
     });
 
     universitySelect.addEventListener('change', (e) => {
@@ -357,20 +296,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     uploadBtn.addEventListener('click', () => photoInput.click());
-    photoInput.addEventListener('change', (e) => {
-        if (e.target.files[0]) handlePhotoUpload(e.target.files[0]);
-    });
-
+    photoInput.addEventListener('change', (e) => { if (e.target.files[0]) handlePhotoUpload(e.target.files[0]); });
     copyEmailBtn.addEventListener('click', copyEmail);
     regenerateBtn.addEventListener('click', () => {
         uploadedPhotoBase64 = null;
         photoInput.value = '';
-        if (currentUniversity) generateAllData();
-        else alert('Please select a university first');
+        if (currentUniversity) generateAllData(); else alert('Please select a university first');
     });
-
     downloadPngBtn.addEventListener('click', exportToPng);
     downloadPdfBtn.addEventListener('click', exportToPdf);
 
-    console.log('[READY] All systems ready');
+    console.log('[READY] All systems online');
 });
