@@ -134,9 +134,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const email = `${emailUsername}@${currentUniversity.domain}`;
 
 
-        // Use pravatar.cc - works well with CORS on localhost, realistic photos
-        const pravatarId = Math.floor(Math.random() * 70);
-        const realisticPhotoUrl = `https://i.pravatar.cc/400?img=${pravatarId}`;
+        // Use randomuser.me API - has proper CORS headers and works on production
+        const gender = Math.random() > 0.5 ? 'men' : 'women';
+        const randomId = Math.floor(Math.random() * 99);
+        const realisticPhotoUrl = `https://randomuser.me/api/portraits/${gender}/${randomId}.jpg`;
 
         studentNameInput.value = fullName;
         studentIdInput.value = studentId;
