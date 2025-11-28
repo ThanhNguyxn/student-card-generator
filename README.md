@@ -18,6 +18,9 @@ A production-ready web application that generates professional student ID cards 
 
 Visit: [https://thanhnguyxn.github.io/student-card-generator/](https://thanhnguyxn.github.io/student-card-generator/)
 
+### 🌐 Web Application Preview
+![Student ID Generator Web Interface](image.png)
+
 ## ⚠️ Important Warning
 
 > [!WARNING]
@@ -143,9 +146,10 @@ git push origin gh-pages
 
 1. **Select Country** - Choose from 13 available countries
 2. **Select University** - Pick from top universities in that country
-3. **Upload Photo (Optional)** - Use your own photo or let AI generate one
-4. **Generate** - AI automatically creates student data with proper localization
-5. **Download** - Export as PNG or PDF
+3. **Customize Details** - Edit name, ID, major, or dates if needed
+4. **Upload Photo (Optional)** - Use your own photo or let AI generate one
+5. **Generate Identity** - Click "Generate New Identity" to refresh data
+6. **Download** - Export as PNG or PDF
 
 ## 🌍 Supported Countries & Universities
 
@@ -155,6 +159,7 @@ git push origin gh-pages
 - VNU University of Information Technology (VNU-UIT)
 - FPT University
 - Posts and Telecommunications Institute of Technology (PTIT)
+- VNU University of Science (HCMUS)
 
 ### USA
 - Massachusetts Institute of Technology (MIT)
@@ -180,19 +185,19 @@ git push origin gh-pages
 
 ## 🎨 Key Features Explained
 
-### Smart Data Generation
-- **Localized Names**: Vietnamese names for Vietnamese unis, Japanese for Japanese unis, etc.
-- **Smart Dates**: Issue date randomly set 1-6 months in the past, valid for 4 years
+### 🤖 AI-Powered Data Generation
+- **Context-Aware Localization**: Vietnamese names for Vietnamese unis, Japanese for Japanese unis, etc.
+- **Intelligent Date Logic**: Issue date randomly set 1-6 months in the past, valid for 4 years
 - **Realistic Emails**: Generated based on university domain
 - **Unique IDs**: Year + 5-digit random number
 
-### Photo Handling
-- Default: Random avatar from `pravatar.cc`
-- Custom: Upload your own photo (automatically converted to Base64 for CORS safety)
+### 📸 Advanced Photo Processing
+- **Automatic Fallback**: Random avatar from `pravatar.cc` if no photo is provided
+- **Secure Local Processing**: Upload your own photo (automatically converted to Base64 for CORS safety)
 
-### Export Options
-- **PNG**: High-quality image export using html2canvas
-- **PDF**: Centered on A4 landscape page using jsPDF
+### 📤 High-Fidelity Exports
+- **Crystal Clear PNG**: High-quality image export using html2canvas
+- **Print-Ready PDF**: Centered on A4 landscape page using jsPDF
 
 ## 🔧 Customization
 
@@ -251,10 +256,6 @@ MIT License - feel free to use this project for personal or commercial purposes.
 - Faker.js for data generation
 - html2canvas for DOM rendering
 - jsPDF for PDF export
-
-
-### Web Application Preview
-![Student ID Generator Web Interface](image.png)
 
 ## 🚀 Future Enhancements
 

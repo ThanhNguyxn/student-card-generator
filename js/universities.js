@@ -156,6 +156,16 @@ const UNIVERSITY_DATA = {
             layout: "vertical",
             address: "122 Hoang Quoc Viet, Cau Giay, Hanoi, Vietnam",
             majors: ["Telecommunications Engineering", "Information Technology", "Electronics Engineering", "Network Administration", "Computer Engineering"]
+        },
+        {
+            name: "VNU University of Science",
+            shortName: "HCMUS",
+            domain: "hcmus.edu.vn",
+            logo: "img/logos/hcmus.png",
+            color: "#003366",
+            layout: "horizontal",
+            address: "227 Nguyen Van Cu, District 5, Ho Chi Minh City, Vietnam",
+            majors: ["Information Technology", "Computer Science", "Data Science", "Mathematics", "Physics"]
         }
     ],
     "UK": [

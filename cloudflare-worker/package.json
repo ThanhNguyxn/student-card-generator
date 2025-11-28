@@ -1,0 +1,12 @@
+{
+  "name": "student-photo-proxy",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker to proxy randomuser.me API and bypass CORS",
+  "main": "worker.js",
+  "scripts": {
+    "deploy": "wrangler publish"
+  },
+  "keywords": ["cloudflare-worker", "cors-proxy", "randomuser"],
+  "author": "ThanhNguyxn",
+  "license": "MIT"
+}

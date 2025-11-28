@@ -135,154 +135,17 @@
     <!-- html2canvas v1.4.1 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-    <!DOCTYPE html>
-    <html lang="en">
+    <!-- jsPDF (Latest) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description"
-            content="Generate professional student ID cards from universities worldwide with AI-powered data">
-        <meta name="author" content="ThanhNguyxn">
-        <title>Global Student ID Generator</title>
+    <!-- University Data -->
+    <script src="js/universities.js"></script>
 
-        <!--tailwind CSS CDN -->
-        <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuration (Worker URL, etc.) -->
+    <script src="js/config.js?v=worker1"></script>
 
-        <!-- Custom Styles -->
-        <link rel="stylesheet" href="css/style.css">
+    <!-- Main Application Script -->
+    <script src="js/script.js?v=worker1"></script>
+</body>
 
-        <!-- Favicon -->
-        <link rel="icon"
-            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
-    </head>
-
-    <body>
-        <div class="container">
-            <!-- Left Sidebar - Controls -->
-            <aside class="sidebar">
-                <h1>🎓 Student ID Generator</h1>
-                <p>Generate professional student IDs from universities worldwide</p>
-
-                <!-- Country Selection -->
-                <div class="form-group">
-                    <label for="countrySelect">Select Country</label>
-                    <select id="countrySelect">
-                        <option value="">-- Select Country --</option>
-                    </select>
-                </div>
-
-                <!-- University Selection -->
-                <div class="form-group">
-                    <label for="universitySelect">Select University</label>
-                    <select id="universitySelect" disabled>
-                        <option value="">-- Select University --</option>
-                    </select>
-                </div>
-
-                <!-- Editable Student Information -->
-                <div class="form-group">
-                    <label for="studentName">Full Name</label>
-                    <input type="text" id="studentName" class="form-input" placeholder="AI will generate...">
-                </div>
-
-                <div class="form-group">
-                    <label for="studentId">Student ID</label>
-                    <input type="text" id="studentId" class="form-input" placeholder="AI will generate...">
-                </div>
-
-                <div class="form-group">
-                    <label for="studentEmail">Email</label>
-                    <div class="input-with-button">
-                        <input type="email" id="studentEmail" class="form-input" placeholder="AI will generate...">
-                        <button class="btn-icon" id="copyEmailBtn" title="Copy Email">
-                            📋
-                        </button>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="studentMajor">Major / Department</label>
-                    <input type="text" id="studentMajor" class="form-input" placeholder="e.g. Information Technology"
-                        value="Information Technology">
-                </div>
-
-                <div class="form-group">
-                    <label for="dateOfBirth">Date of Birth</label>
-                    <input type="date" id="dateOfBirth" class="form-input">
-                </div>
-
-                <div class="form-group">
-                    <label for="issueDate">Issue Date</label>
-                    <input type="date" id="issueDate" class="form-input">
-                </div>
-
-                <div class="form-group">
-                    <label for="expiryDate">Expiry Date</label>
-                    <input type="date" id="expiryDate" class="form-input">
-                </div>
-
-                <!-- Photo Upload -->
-                <div class="form-group">
-                    <label>Custom Photo (Optional)</label>
-                    <input type="file" id="photoInput" accept="image/*">
-                    <button class="btn btn-secondary" id="uploadBtn">
-                        📸 Upload Photo
-                    </button>
-                </div>
-
-                <!-- Action Buttons -->
-                <button class="btn btn-primary" id="regenerateBtn">
-                    🔄 Generate New Identity
-                </button>
-
-                <!-- Download Section -->
-                <div class="btn-group">
-                    <button class="btn btn-success" id="downloadPngBtn">
-                        ⬇️ Download PNG
-                    </button>
-                    <button class="btn btn-danger" id="downloadPdfBtn">
-                        📄 Download PDF
-                    </button>
-                </div>
-
-                <!-- Footer Info -->
-                <div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #f0f0f0;">
-                    <p style="font-size: 12px; color: #999; text-align: center;">
-                        Made with ❤️ by <a href="https://github.com/ThanhNguyxn" target="_blank"
-                            style="color: #667eea; text-decoration: none;">ThanhNguyxn</a>
-                    </p>
-                </div>
-            </aside>
-
-            <!-- Right Preview Area -->
-            <main class="preview-section">
-                <div id="cardPreview">
-                    <div class="placeholder-text">
-                        Select a country and university to generate student ID
-                    </div>
-                </div>
-            </main>
-        </div>
-
-        <!-- External Libraries -->
-        <!-- Faker.js v5.5.3 (Old Stable API) - Using jsDelivr CDN -->
-        <script src="https://cdn.jsdelivr.net/npm/faker@5.5.3/dist/faker.min.js"></script>
-
-        <!-- html2canvas v1.4.1 -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
-        <!-- jsPDF (Latest) -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-        <!-- University Data -->
-        <script src="js/universities.js"></script>
-
-        <!-- Configuration (Worker URL, etc.) -->
-        <script src="js/config.js?v=worker1"></script>
-
-        <!-- Main Application Script -->
-        <script src="js/script.js?v=worker1"></script>
-    </body>
-
-    </html>
+</html>
