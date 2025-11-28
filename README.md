@@ -20,7 +20,7 @@ A production-ready web application that generates professional student ID cards 
 
 ## 🎯 Live Demo
 
-Visit: [https://thanhnguyen.github.io/student-card-generator/](https://thanhnguyen.github.io/student-card-generator/)
+Visit: [https://thanhnguyxn.github.io/student-card-generator/](https://thanhnguyxn.github.io/student-card-generator/)
 
 ## ⚠️ Important Warning
 
