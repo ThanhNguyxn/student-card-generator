@@ -317,37 +317,6 @@ input[type="file"] {
     /* Center vertically */
 }
 
-.horizontal-card .student-photo {
-    width: 120px;
-    height: 120px;
-}
-
-/* Grid layout for info to save vertical space */
-.horizontal-card .student-info {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 20px;
-    row-gap: 8px;
-}
-
-/* Make Name and Email span full width */
-.horizontal-card .student-info .info-row:nth-child(1),
-/* Name */
-.horizontal-card .student-info .info-row:nth-child(5)
-
-/* Email */
-    {
-    grid-column: span 2;
-}
-
-.horizontal-card .info-row {
-    margin-bottom: 0;
-    /* Remove margin as we use grid gap */
-}
-
-.horizontal-card .info-row .label {
-    font-size: 10px;
-}
 
 .horizontal-card .info-row .value {
     font-size: 13px;

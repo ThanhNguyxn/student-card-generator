@@ -27,6 +27,13 @@ document.addEventListener('DOMContentLoaded', function () {
     showPlaceholder(); // Show placeholder initially
 
     function loadCountries() {
+        console.log('[DEBUG] Loading countries...');
+        if (typeof UNIVERSITY_DATA === 'undefined') {
+            console.error('[ERROR] UNIVERSITY_DATA is not defined!');
+            alert('Error: University data not loaded. Please refresh the page.');
+            return;
+        }
+
         countrySelect.innerHTML = '<option value="">-- Select Country --</option>';
         Object.keys(UNIVERSITY_DATA).forEach(country => {
             const option = document.createElement('option');
@@ -34,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
             option.textContent = country;
             countrySelect.appendChild(option);
         });
+        console.log('[DEBUG] Countries loaded:', countrySelect.options.length);
     }
 
     function showPlaceholder() {
@@ -116,11 +124,20 @@ document.addEventListener('DOMContentLoaded', function () {
             major = currentUniversity.majors[Math.floor(Math.random() * currentUniversity.majors.length)];
         }
         const fullName = faker.name.findName();
-        const emailUsername = fullName.toLowerCase().replace(/\s+/g, '.').replace(/[^a-z.]/g, '');
+        // Fix email generation: remove accents, special chars, and ensure single dots
+        const emailUsername = fullName.toLowerCase()
+            .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove accents
+            .replace(/[^a-z0-9]/g, '.') // Replace non-alphanumeric with dots
+            .replace(/\.+/g, '.') // Squash multiple dots
+            .replace(/^\.+|\.+$/g, ''); // Trim leading/trailing dots
+
         const email = `${emailUsername}@${currentUniversity.domain}`;
-        const randomId = Math.floor(Math.random() * 70);
-        const timestamp = Date.now();
-        const realisticPhotoUrl = `https://i.pravatar.cc/300?img=${randomId}&t=${timestamp}`;
+
+        // Use randomuser.me which is more reliable than pravatar.cc
+        const gender = Math.random() > 0.5 ? 'men' : 'women';
+        const randomId = Math.floor(Math.random() * 99);
+        const realisticPhotoUrl = `https://randomuser.me/api/portraits/${gender}/${randomId}.jpg`;
+
         studentNameInput.value = fullName;
         studentIdInput.value = studentId;
         studentEmailInput.value = email;
@@ -135,9 +152,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateCardPreview(photoOverride = null) {
         if (!currentUniversity) return;
-        const randomId = Math.floor(Math.random() * 70);
-        const timestamp = Date.now();
-        const defaultPhoto = `https://i.pravatar.cc/300?img=${randomId}&t=${timestamp}`;
+        // Fallback photo if needed
+        const defaultPhoto = `https://randomuser.me/api/portraits/lego/1.jpg`;
         const photoUrl = photoOverride || uploadedPhotoBase64 || defaultPhoto;
         renderCard({
             name: studentNameInput.value || 'Student Name',
@@ -153,24 +169,32 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function renderCard(data) {
+        // Base64 Encoded SVGs to avoid quote escaping issues in inline JS
+        // Logo Fallback: Simple Building Icon
+        const fallbackLogo = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCcgZmlsbD0nbm9uZScgc3Ryb2tlPScjNjY2JyBzdHJva2Utd2lkdGg9JzInIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTMgMjF2LThhMiAyIDAgMCAxIDItMmgydjhhMiAyIDAgMCAxLTIgMmgtMmEyIDIgMCAwIDEtMi0yeiIvPjxwYXRoIGQ9Ik0xMyAyMVY5YTIgMiAwIDAgMSAyLTJoMnYxMmEyIDIgMCAwIDEtMiAyaC0yYTIgMiAwIDAgMSAyLTJ6Ii8+PHBhdGggZD0iTTUgN2g5Ii8+PHBhdGggZD0iTTUgMTFoOSIvPjwvc3ZnPg==";
+
+        // Photo Fallback: User Icon
+        const fallbackPhoto = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCcgZmlsbD0nbm9uZScgc3Ryb2tlPScjOTk5JyBzdHJva2Utd2lkdGg9JzInIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTIwIDIxdi0yYTQgNCAwIDAgMC00LTRIOGE0IDQgMCAwIDAtNCA0djIiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjciIHI9IjQiLz48L3N2Zz4=";
+
         cardPreview.innerHTML = `
       <div class="id-card ${data.university.layout === 'vertical' ? 'vertical-card' : 'horizontal-card'}" style="border-top: 4px solid ${data.university.color}">
         <div class="glass-overlay"></div>
         <div class="card-header" style="background: linear-gradient(135deg, ${data.university.color}, ${data.university.color}dd)">
-          <img src="${data.university.logo}" alt="${data.university.shortName}" class="university-logo" onerror="this.style.display='none'">
+          <img src="${data.university.logo}" alt="${data.university.shortName}" class="university-logo" onerror="this.onerror=null; this.src='${fallbackLogo}'; this.style.padding='5px'; this.style.background='white';">
           <div class="university-info">
             <h2 class="university-name">${data.university.shortName}</h2>
             <p class="university-full-name">${data.university.name}</p>
           </div>
         </div>
         <div class="card-content">
-          <div class="photo-container"><img src="${data.photo}" alt="Student Photo" class="student-photo" crossorigin="anonymous"></div>
+          <div class="photo-container">
+            <img src="${data.photo}" alt="Student Photo" class="student-photo" crossorigin="anonymous" onerror="this.onerror=null; this.src='${fallbackPhoto}'; this.style.padding='20px'; this.style.background='#f0f0f0';">
+          </div>
           <div class="student-info">
-            <div class="info-row"><span class="label">Full Name:</span><span class="value">${data.name}</span></div>
+            <div class="info-row name-row"><span class="label">Full Name:</span><span class="value">${data.name}</span></div>
             <div class="info-row"><span class="label">Student ID:</span><span class="value id-number">${data.id}</span></div>
             <div class="info-row"><span class="label">Date of Birth:</span><span class="value">${data.dob}</span></div>
             <div class="info-row"><span class="label">Major:</span><span class="value">${data.major}</span></div>
-            <div class="info-row"><span class="label">Email:</span><span class="value email">${data.email}</span></div>
             <div class="info-row"><span class="label">Issued:</span><span class="value">${data.issued}</span></div>
             <div class="info-row"><span class="label">Valid Thru:</span><span class="value">${data.validThru}</span></div>
           </div>
