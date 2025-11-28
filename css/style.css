@@ -39,6 +39,7 @@ body {
     background: linear-gradient(135deg, #667eea, #764ba2);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .sidebar p {
@@ -166,11 +167,117 @@ body {
     text-align: center;
 }
 
+input[type="file"] {
+    display: none;
+}
+
+.preview-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    padding: 40px;
+    min-height: 650px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 2px 20px rgba(0, 0, 0, 0.2);
+}
+
+.placeholder-text {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+}
+
+.placeholder-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 60px 50px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+}
+
+.placeholder-icon {
+    font-size: 80px;
+    margin-bottom: 20px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.placeholder-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 32px;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.placeholder-subtitle {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 35px;
+    line-height: 1.6;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.social-btn.github {
+    background: #24292e;
+    color: white;
+}
+
+.social-btn.github:hover {
+    background: #1a1e22;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(36, 41, 46, 0.4);
+}
+
+.social-btn.coffee {
+    background: #FFDD00;
+    color: #000;
+}
+
+.social-btn.coffee:hover {
+    background: #ffcc00;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 221, 0, 0.4);
+}
+
 /* LARGE CARD - 900px for maximum visibility */
 .id-card {
-    width: 100%;
+    /* Removed width: 100% to allow fixed width on horizontal cards */
     max-width: 900px;
-    aspect-ratio: 85.6 / 54;
     background: white;
     border-radius: 16px;
     box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
@@ -181,6 +288,98 @@ body {
 
 .horizontal-card {
     aspect-ratio: 85.6 / 54;
+    width: 700px;
+    /* Fixed larger width */
+    max-width: 100%;
+}
+
+/* Horizontal Card - Optimized Layout */
+.horizontal-card .card-header {
+    padding: 15px 25px;
+}
+
+.horizontal-card .university-logo {
+    width: 55px;
+    height: 55px;
+}
+
+.horizontal-card .university-name {
+    font-size: 24px;
+}
+
+.horizontal-card .university-full-name {
+    font-size: 12px;
+}
+
+.horizontal-card .card-content {
+    padding: 15px 25px;
+    align-items: center;
+    /* Center vertically */
+}
+
+.horizontal-card .student-photo {
+    width: 120px;
+    height: 120px;
+}
+
+/* Grid layout for info to save vertical space */
+.horizontal-card .student-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 8px;
+}
+
+/* Make Name and Email span full width */
+.horizontal-card .student-info .info-row:nth-child(1),
+/* Name */
+.horizontal-card .student-info .info-row:nth-child(5)
+
+/* Email */
+    {
+    grid-column: span 2;
+}
+
+.horizontal-card .info-row {
+    margin-bottom: 0;
+    /* Remove margin as we use grid gap */
+}
+
+.horizontal-card .info-row .label {
+    font-size: 10px;
+}
+
+.horizontal-card .info-row .value {
+    font-size: 13px;
+}
+
+.horizontal-card .info-row .id-number {
+    font-size: 14px !important;
+}
+
+.horizontal-card .info-row .email {
+    font-size: 12px !important;
+}
+
+.horizontal-card .card-footer {
+    padding: 12px 25px;
+}
+
+.horizontal-card .signature-text {
+    font-size: 24px;
+}
+
+.horizontal-card .signature-label {
+    font-size: 9px;
+}
+
+.horizontal-card .barcode-svg {
+    width: 90px;
+    height: 28px;
+}
+
+.horizontal-card .barcode-number {
+    font-size: 10px;
 }
 
 .vertical-card {
@@ -351,6 +550,39 @@ body {
     color: #666;
 }
 
+.social-footer {
+    margin-top: 25px;
+    padding: 15px 25px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-link-small {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.social-link-small:hover {
+    color: white;
+    transform: translateY(-1px);
+}
+
+.social-divider {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 16px;
+}
+
 @media (max-width: 1200px) {
     .container {
         grid-template-columns: 1fr;
@@ -373,5 +605,18 @@ body {
     .vertical-card {
         width: 100%;
         max-width: 400px;
+    }
+
+    .social-links {
+        flex-direction: column;
+    }
+
+    .social-footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .social-divider {
+        display: none;
     }
 }
