@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
       <div class="id-card ${data.university.layout === 'vertical' ? 'vertical-card' : 'horizontal-card'}" style="border-top: 4px solid ${data.university.color}">
         <div class="glass-overlay"></div>
         <div class="card-header" style="background: linear-gradient(135deg, ${data.university.color}, ${data.university.color}dd)">
-          <img src="${data.university.logo}" alt="${data.university.shortName}" class="university-logo" onerror="this.onerror=null; this.src='${fallbackLogo}'; this.style.padding='5px'; this.style.background='white';">
+          <img src="${data.university.logo}" alt="${data.university.shortName}" class="university-logo" crossorigin="anonymous" onerror="this.onerror=null; this.src='${fallbackLogo}'; this.style.padding='5px'; this.style.background='white';">
           <div class="university-info">
             <h2 class="university-name">${data.university.shortName}</h2>
             <p class="university-full-name">${data.university.name}</p>
