@@ -133,10 +133,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const email = `${emailUsername}@${currentUniversity.domain}`;
 
-        // Use randomuser.me which is more reliable than pravatar.cc
-        const gender = Math.random() > 0.5 ? 'men' : 'women';
-        const randomId = Math.floor(Math.random() * 99);
-        const realisticPhotoUrl = `https://randomuser.me/api/portraits/${gender}/${randomId}.jpg`;
+
+        // Use pravatar.cc - works well with CORS on localhost, realistic photos
+        const pravatarId = Math.floor(Math.random() * 70);
+        const realisticPhotoUrl = `https://i.pravatar.cc/400?img=${pravatarId}`;
 
         studentNameInput.value = fullName;
         studentIdInput.value = studentId;
@@ -145,9 +145,40 @@ document.addEventListener('DOMContentLoaded', function () {
         dateOfBirthInput.value = formatDateForInput(dates.dob);
         issueDateInput.value = formatDateForInput(dates.issued);
         expiryDateInput.value = formatDateForInput(dates.validThru);
-        const photoUrl = uploadedPhotoBase64 || realisticPhotoUrl;
+
         console.log('[GENERATED]', fullName);
-        updateCardPreview(photoUrl);
+
+        // Show card IMMEDIATELY with placeholder - no waiting!
+        const placeholderPhoto = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCcgZmlsbD0nbm9uZScgc3Ryb2tlPScjY2NjJyBzdHJva2Utd2lkdGg9JzInPjxjaXJjbGUgY3g9JzEyJyBjeT0nOCcgcj0nNCcvPjxwYXRoIGQ9J00yMCAyMXYtMmE0IDQgMCAwIDAtNC00SDhhNCA0IDAgMCAwLTQgNHYyJy8+PC9zdmc+";
+        updateCardPreview(uploadedPhotoBase64 || placeholderPhoto);
+
+        // Then load actual photo asynchronously and update when ready
+        if (!uploadedPhotoBase64) {
+            loadPhotoAsync(realisticPhotoUrl);
+        }
+    }
+
+    /**
+     * Load photo asynchronously without blocking card display
+     */
+    function loadPhotoAsync(photoUrl) {
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+
+        img.onload = function () {
+            console.log('[PHOTO] Loaded successfully, updating card...');
+            updateCardPreview(photoUrl);
+        };
+
+        img.onerror = function () {
+            console.warn('[PHOTO] Failed to load, using fallback avatar');
+            // Generate fallback Dicebear avatar
+            const seed = encodeURIComponent(studentNameInput.value);
+            const fallbackUrl = `https://api.dicebear.com/7.x/adventurer/svg?seed=${seed}`;
+            updateCardPreview(fallbackUrl);
+        };
+
+        img.src = photoUrl;
     }
 
     function updateCardPreview(photoOverride = null) {
