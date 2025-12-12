@@ -22,7 +22,8 @@ body {
     grid-template-columns: 280px 1fr;
     gap: 0;
     overflow: hidden;
-    width: 100%;
+    width: 100vw;
+    max-width: 100vw;
 }
 
 .sidebar {
@@ -622,14 +623,8 @@ input[type="file"] {
 }
 
 .card-label {
-    color: white;
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 8px 16px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
+    display: none;
+    /* Hidden - not necessary */
 }
 
 .id-card-back {
