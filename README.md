@@ -10,8 +10,14 @@ A production-ready web application that generates professional student ID cards 
 
 - 📸 **Custom Photo Upload** with Base64 conversion (CORS-safe)
 - 🎴 **Dual Layout Support** - Vertical and Horizontal ID card formats
-- 📥 **Multiple Export Options** - Download as PNG or PDF
+- 👀 **Multiple View Modes** - View Both, Front Only, or Back Only
+- 📄 **Multiple Document Types** - ID Cards, Standard Docs (Transcript, Schedule), Extra Docs (Admission Letter, Enrollment Certificate)
+- 👔 **Student & Teacher Modes** - Generate documents for students or faculty members
+- 📥 **Multiple Export Options** - Download as PNG, PDF, or ZIP (both sides)
 - 📱 **Fully Responsive** - Works on desktop, tablet, and mobile
+- 🖱️ **Drag & Pan** - Freely drag cards/documents in preview area
+- 🔍 **Zoom Controls** - Zoom in/out for detailed preview
+- 🎭 **Realistic Photos** - AI-generated photos via Cloudflare Worker
 - 🚀 **Zero Backend** - Pure frontend, ready for GitHub Pages
 
 ## 🎯 Live Demo
@@ -73,7 +79,10 @@ student-card-generator/
 │   └── style.css          # Custom glassmorphism & card styles
 ├── js/
 │   ├── universities.js    # Database of 50+ universities (Real data)
+│   ├── config.js          # Configuration for photo proxy & settings
 │   └── script.js          # Main application logic
+├── cloudflare-worker/
+│   └── worker.js          # Cloudflare Worker for realistic photos
 ├── README.md              # This file
 └── LICENSE                # MIT License
 ```
@@ -259,6 +268,13 @@ MIT License - feel free to use this project for personal or commercial purposes.
 
 ## 🚀 Future Enhancements
 
+- [x] Multiple view modes (Both/Front/Back)
+- [x] Multiple document types (ID Cards, Standard Docs, Extra Docs)
+- [x] Student & Teacher modes
+- [x] Drag & pan functionality
+- [x] Zoom controls
+- [x] ZIP download (both sides)
+- [x] Realistic AI photos via Cloudflare Worker
 - [ ] QR code with real student data
 - [ ] More countries and universities
 - [ ] Custom color themes

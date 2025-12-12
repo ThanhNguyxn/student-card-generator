@@ -21,6 +21,28 @@
 </head>
 
 <body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-section nav-mode">
+            <span class="nav-label">Mode:</span>
+            <button class="mode-btn active" id="studentModeBtn">Student</button>
+            <a href="https://thanhnguyxn.github.io/payslip-generator/" class="mode-btn" target="_blank">Teacher</a>
+        </div>
+        <div class="nav-section nav-docs">
+            <button class="doc-tab" id="docStandardBtn">Standard Docs</button>
+            <button class="doc-tab" id="docExtraBtn">Extra Docs</button>
+            <button class="doc-tab active" id="docIdCardBtn">ID Card</button>
+        </div>
+        <div class="nav-section nav-view">
+            <button class="nav-tab active" id="viewBothBtn">Both</button>
+            <button class="nav-tab" id="viewFrontBtn">Front</button>
+            <button class="nav-tab" id="viewBackBtn">Back</button>
+        </div>
+        <div class="nav-section nav-download">
+            <button class="nav-btn download-zip" id="downloadZipBtn">📦 Download ZIP</button>
+        </div>
+    </nav>
+
     <div class="container">
         <!-- Left Sidebar - Controls -->
         <aside class="sidebar">
@@ -101,16 +123,13 @@
 
             <!-- Download Section -->
             <div class="btn-group">
-                <button class="btn btn-success" id="downloadPngBtn">
-                    ⬇️ Download PNG
-                </button>
-                <button class="btn btn-danger" id="downloadPdfBtn">
-                    📄 Download PDF
-                </button>
+                
+                
             </div>
 
             <!-- Footer Info -->
             <div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #f0f0f0;">
+                
                 <p style="font-size: 12px; color: #999; text-align: center;">
                     Made with ❤️ by <a href="https://github.com/ThanhNguyxn" target="_blank"
                         style="color: #667eea; text-decoration: none;">ThanhNguyxn</a>
@@ -125,6 +144,12 @@
                     Select a country and university to generate student ID
                 </div>
             </div>
+                    <!-- Zoom Controls -->
+            <div class="zoom-controls">
+                <button class="zoom-btn" id="zoomOutBtn">−</button>
+                <span class="zoom-level" id="zoomLevel">100%</span>
+                <button class="zoom-btn" id="zoomInBtn">+</button>
+            </div>
         </main>
     </div>
 
@@ -138,6 +163,9 @@
     <!-- jsPDF (Latest) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
+    <!-- JSZip for ZIP downloads -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
     <!-- University Data -->
     <script src="js/universities.js"></script>
 
@@ -149,3 +177,10 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
