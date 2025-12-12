@@ -182,6 +182,16 @@ input[type="file"] {
     flex-direction: column;
     align-items: center;
     width: 100%;
+    /* Hide scrollbar but keep scroll functionality */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE/Edge */
+}
+
+.preview-section::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
 }
 
 .placeholder-text {
