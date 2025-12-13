@@ -364,9 +364,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Render both front and back cards
     function renderBothCards(data) {
+        const isTeacher = currentMode === 'teacher';
+        const cardType = isTeacher ? 'Faculty ID' : 'Student ID';
+
         const frontCard = `
         <div class="card-wrapper">
-            <div class="card-label">Student ID (Front)</div>
+            <div class="card-label">${cardType} (Front)</div>
             <div class="id-card ${data.university.layout === 'vertical' ? 'vertical-card' : 'horizontal-card'}" style="border-top: 4px solid ${data.university.color}" id="idCardFront">
                 ${getCardFrontContent(data)}
             </div>
@@ -374,7 +377,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const backCard = `
         <div class="card-wrapper">
-            <div class="card-label">Student ID (Back)</div>
+            <div class="card-label">${cardType} (Back)</div>
             ${renderCardBack(data)}
         </div>`;
 
@@ -398,6 +401,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const fallbackLogo = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCcgZmlsbD0nbm9uZScgc3Ryb2tlPScjNjY2JyBzdHJva2Utd2lkdGg9JzInIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTMgMjF2LThhMiAyIDAgMCAxIDItMmgydjhhMiAyIDAgMCAxLTIgMmgtMmEyIDIgMCAwIDEtMi0yeiIvPjxwYXRoIGQ9Ik0xMyAyMVY5YTIgMiAwIDAgMSAyLTJoMnYxMmEyIDIgMCAwIDEtMiAyaC0yYTIgMiAwIDAgMSAyLTJ6Ii8+PHBhdGggZD0iTTUgN2g5Ii8+PHBhdGggZD0iTTUgMTFoOSIvPjwvc3ZnPg==";
         const fallbackPhoto = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCcgZmlsbD0nbm9uZScgc3Ryb2tlPScjOTk5JyBzdHJva2Utd2lkdGg9JzInIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTIwIDIxdi0yYTQgNCAwIDAgMC00LTRIOGE0IDQgMCAwIDAtNCA0djIiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjciIHI9IjQiLz48L3N2Zz4=";
 
+        // Dynamic labels based on mode
+        const isTeacher = currentMode === 'teacher';
+        const idLabel = isTeacher ? 'Faculty ID:' : 'Student ID:';
+        const majorLabel = isTeacher ? 'Department:' : 'Major:';
+        const signatureLabel = isTeacher ? 'Faculty Signature' : 'Student Signature';
+        const photoAlt = isTeacher ? 'Faculty Photo' : 'Student Photo';
+
         return `
             <div class="glass-overlay"></div>
             <div class="card-header" style="background: linear-gradient(135deg, ${data.university.color}, ${data.university.color}dd)">
@@ -409,19 +419,19 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
             <div class="card-content">
                 <div class="photo-container">
-                    <img src="${data.photo}" alt="Student Photo" class="student-photo" crossorigin="anonymous" onerror="this.onerror=null; this.src='${fallbackPhoto}'; this.style.padding='20px'; this.style.background='#f0f0f0';">
+                    <img src="${data.photo}" alt="${photoAlt}" class="student-photo" crossorigin="anonymous" onerror="this.onerror=null; this.src='${fallbackPhoto}'; this.style.padding='20px'; this.style.background='#f0f0f0';">
                 </div>
                 <div class="student-info">
                     <div class="info-row name-row"><span class="label">Full Name:</span><span class="value">${data.name}</span></div>
-                    <div class="info-row"><span class="label">Student ID:</span><span class="value id-number">${data.id}</span></div>
+                    <div class="info-row"><span class="label">${idLabel}</span><span class="value id-number">${data.id}</span></div>
                     <div class="info-row"><span class="label">Date of Birth:</span><span class="value">${data.dob}</span></div>
-                    <div class="info-row"><span class="label">Major:</span><span class="value">${data.major}</span></div>
+                    <div class="info-row"><span class="label">${majorLabel}</span><span class="value">${data.major}</span></div>
                     <div class="info-row"><span class="label">Issued:</span><span class="value">${data.issued}</span></div>
                     <div class="info-row"><span class="label">Valid Thru:</span><span class="value">${data.validThru}</span></div>
                 </div>
             </div>
             <div class="card-footer">
-                <div class="signature"><span class="signature-text">${data.name}</span><span class="signature-label">Student Signature</span></div>
+                <div class="signature"><span class="signature-text">${data.name}</span><span class="signature-label">${signatureLabel}</span></div>
                 <div class="barcode">
                     <svg viewBox="0 0 120 40" class="barcode-svg">
                         <rect x="0" y="0" width="4" height="40" fill="#000"/><rect x="6" y="0" width="2" height="40" fill="#000"/><rect x="10" y="0" width="4" height="40" fill="#000"/><rect x="16" y="0" width="2" height="40" fill="#000"/><rect x="20" y="0" width="6" height="40" fill="#000"/><rect x="28" y="0" width="2" height="40" fill="#000"/><rect x="32" y="0" width="4" height="40" fill="#000"/><rect x="38" y="0" width="2" height="40" fill="#000"/><rect x="42" y="0" width="4" height="40" fill="#000"/><rect x="48" y="0" width="6" height="40" fill="#000"/><rect x="56" y="0" width="2" height="40" fill="#000"/><rect x="60" y="0" width="4" height="40" fill="#000"/><rect x="66" y="0" width="2" height="40" fill="#000"/><rect x="70" y="0" width="6" height="40" fill="#000"/><rect x="78" y="0" width="2" height="40" fill="#000"/><rect x="82" y="0" width="4" height="40" fill="#000"/><rect x="88" y="0" width="2" height="40" fill="#000"/><rect x="92" y="0" width="4" height="40" fill="#000"/><rect x="98" y="0" width="6" height="40" fill="#000"/><rect x="106" y="0" width="2" height="40" fill="#000"/><rect x="110" y="0" width="4" height="40" fill="#000"/><rect x="116" y="0" width="2" height="40" fill="#000"/>
