@@ -11,13 +11,15 @@ A production-ready web application that generates professional student ID cards 
 - 📸 **Custom Photo Upload** with Base64 conversion (CORS-safe)
 - 🎴 **Dual Layout Support** - Vertical and Horizontal ID card formats
 - 👀 **Multiple View Modes** - View Both, Front Only, or Back Only
-- 📄 **Multiple Document Types** - ID Cards, Standard Docs (Transcript, Schedule), Extra Docs (Admission Letter, Enrollment Certificate)
-- 👔 **Student & Teacher Modes** - Generate documents for students or faculty members
-- 📥 **Multiple Export Options** - Download as PNG, PDF, or ZIP (both sides)
-- 📱 **Fully Responsive** - Works on desktop, tablet, and mobile
+- 📄 **Standard Docs** - Account Statement, Academic Transcript (with calculated GPA), Course Schedule
+- 📜 **Extra Docs** - Admission Letter, Enrollment Certificate
+- 🪪 **ID Cards** - Student ID with barcode, signature, and back side
+- 💼 **Teacher Docs Link** - Quick access to Payslip Generator for faculty documents
+- 📥 **Multiple Export Options** - Download as PNG, PDF, or ZIP (all documents)
 - 🖱️ **Drag & Pan** - Freely drag cards/documents in preview area
-- 🔍 **Zoom Controls** - Zoom in/out for detailed preview
+- 🔍 **Zoom Controls** - 25%-200% zoom with smooth transitions
 - 🎭 **Realistic Photos** - AI-generated photos via Cloudflare Worker
+- 🧮 **Smart GPA Calculation** - Auto-generate courses by major with calculated term GPA
 - 🚀 **Zero Backend** - Pure frontend, ready for GitHub Pages
 
 ## 🎯 Live Demo
@@ -155,10 +157,12 @@ git push origin gh-pages
 
 1. **Select Country** - Choose from 13 available countries
 2. **Select University** - Pick from top universities in that country
-3. **Customize Details** - Edit name, ID, major, or dates if needed
-4. **Upload Photo (Optional)** - Use your own photo or let AI generate one
-5. **Generate Identity** - Click "Generate New Identity" to refresh data
-6. **Download** - Export as PNG or PDF
+3. **Switch Document Type** - Use tabs: `Standard Docs`, `Extra Docs`, `ID Card`
+4. **Customize Details** - Edit name, ID, major, or dates if needed
+5. **Upload Photo (Optional)** - Use your own photo or let AI generate one
+6. **Generate Identity** - Click "Generate New Identity" to refresh data
+7. **Switch View** - Use view tabs: `Both`, `Front`, `Back` (for ID Cards)
+8. **Download** - Click 📦 Download ZIP to get all documents
 
 ## 🌍 Supported Countries & Universities
 
